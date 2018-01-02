@@ -104,6 +104,7 @@ export class TaskService {
 	*/
 	taskClose(id:number): void {
 
+		//Make delete Http Call
 		let closeComp = this.comp.subscribe(taskItm => {
 			taskItm.splice(id, 1);
 		});
@@ -119,6 +120,7 @@ export class TaskService {
 	*/
 	taskDelete(id:number): void {
 
+		// Make Delete Http call
 		let deleteIncomp = this.inComp.subscribe(taskItm => {
 			taskItm.splice(id, 1);
 		});
@@ -134,6 +136,7 @@ export class TaskService {
 	*/
 	updateTaskList(task: TaskModel):void {
 
+		// Make pdate Http call
 		let subIncomp = this.inComp.subscribe(taskItm => {
 			taskItm.push(task);
 		});
