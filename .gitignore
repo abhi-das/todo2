@@ -7,6 +7,8 @@
 
 # dependencies
 /node_modules
+*.js.map
+*.js
 
 # IDEs and editors
 /.idea

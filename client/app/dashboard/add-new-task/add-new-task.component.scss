@@ -1,0 +1,42 @@
+.task {
+	&__new-item {
+		position: relative;
+		padding: 1em 1em .8em 1em;
+	    margin: .5em;
+    	box-shadow: 4px 4px 3px #bdb6b6;
+		background: #f1f1f1;
+		&-title {
+			font-weight: 700;
+			font-size: 1.5em;
+			margin-right:1.5em;
+		}
+		&-author {
+			font-size: .9em;
+		    margin-bottom: 0;
+		}
+		&-description {
+			margin-right:2em;
+		}
+		&-btn-close {
+			position: absolute;
+			top: 1.5em;
+			right: 1.5em;
+			padding: 0;
+			color: #999999;
+			transition: color .5s;
+			&:hover {
+				color: #ea5b5b;
+			}
+		}
+	}
+	/* Form Error Messages Styles */
+	&__error {
+		&-container {
+			& p {
+			    padding: 0 1em;
+			    font-size: .8em;
+			    font-weight: bold;
+			}
+		}
+	}
+}

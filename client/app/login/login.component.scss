@@ -1,0 +1,36 @@
+/*
+ * @author Abhishek
+ * @publish 31-12-2017
+ * @component Form
+ * Styles for base form component
+ */
+
+.login-form {
+
+	margin-top: 60px;
+	color: #5d5d5d;
+	background: #f2f2f2;
+	padding: 26px;
+	border-radius: 10px;
+
+	& input,
+	& button {
+		font-size: 18px;
+		margin: 16px 0;
+	}
+
+	& > div {
+		text-align: center;
+	}
+	
+	/* Form Error Messages Styles */
+	&__error {
+		&-container {
+			& p {
+			    padding: 0 1em;
+			    font-size: .8em;
+			    font-weight: bold;
+			}
+		}
+	}
+}

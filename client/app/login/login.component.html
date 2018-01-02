@@ -1,0 +1,43 @@
+<div class="container">  
+  <div class="row">    
+    <div class="col-md-4 col-md-offset-4">
+        <!-- Login Form Element -->
+        <form class="login-form" role="login"
+            (ngSubmit)="onAuth()" [formGroup]="loginForm">
+          
+          <div class="login-form__icon-container">
+            <i class="fa fa-user-circle fa-5x" aria-hidden="true"></i>
+          </div>
+          
+          <div class="form-group">
+            <input type="text" formControlName="username" 
+              class="form-control input-lg" value="" placeholder="User id"/>
+            
+            <!-- Field Error Feedbck -->
+            <div class="login-form__error-container text-left text-danger"
+                 *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].touched">
+              <p *ngIf="!loginForm.controls['username'].valid">User name is required</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <input type="password" formControlName="password" 
+              class="form-control input-lg" id="password" placeholder="Password"/>
+            
+            <!-- Field Error Feedbck -->
+            <div class="login-form__error-container text-left text-danger"
+                 *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">
+              <p *ngIf="!loginForm.controls['password'].valid">Password is required</p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-lg btn-primary btn-block"
+              [disabled]="!loginForm.valid">Log in</button>
+
+          <div class="login-feeback" *ngIf="isLoginFail">
+            <p>Login failed!</p>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

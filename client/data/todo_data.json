@@ -1,0 +1,32 @@
+{
+  "tasks": [{
+    "title": "Deploy Webapp", 
+    "description": "<p>latest commit on webapp needs deployment</p>", 
+    "status":"completed", 
+    "author": "userId"
+  },
+  {
+    "title": "Add new feature", 
+    "description": "<p>Add the drag drop feature in webapp</p>", 
+    "status":"notCompleted", 
+    "author": "userId"
+  },
+  {
+    "title": "Upgrade NodeJs", 
+    "description": "<p>Upgrade nodeJs version to latest one.</p>", 
+    "status":"notCompleted", 
+    "author": "userId"
+  },
+  {
+    "title": "Upgrade servers", 
+    "description": "<p>Upgrade compute capasity of AWS servers</p>", 
+    "status":"completed", 
+    "author": "userId"
+  },
+  {
+    "title": "Train new recruits", 
+    "description": "<p>Give training to new recruits</p>", 
+    "status":"notCompleted", 
+    "author": "userId"
+  }]
+}

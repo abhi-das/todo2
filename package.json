@@ -1,6 +1,6 @@
 {
   "name": "todoapp",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -8,10 +8,18 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "apiserver": "node index.js",
+    "codecoverage": "http-server -c-1 -o -p 9875 ./coverage"
   },
+  "author": "abhishek",
   "private": true,
   "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.20",
+    "morgan": "^1.7.0",
+    "q": "^1.4.1",
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
     "@angular/compiler": "^5.0.0",
@@ -44,6 +52,9 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "font-awesome": "^4.7.0",
+    "http-server": "^0.10.0",
+    "bootstrap": "^3.3.7"
   }
 }

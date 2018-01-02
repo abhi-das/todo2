@@ -1,0 +1,90 @@
+/*
+ * @author Abhishek
+ * @publish 31-12-2017
+ * @component Dashboard
+ * Styles for Dashboard component
+ */
+
+.task {
+
+    padding: 1em .5em;
+    background: #ccc;
+
+	&__status {
+
+		&-progress {
+		    padding: .5em;
+		    background: #ffa500;
+		    font-size: 2em;
+		    color: #fff;
+		    margin-top: 0;
+		}
+		&-complete {
+		    padding: .5em;
+		    background: #39bb39;
+		    font-size: 2em;
+		    color: #fff;
+		    margin-top: 0;
+		}
+	}
+
+	&__task-list {
+		list-style: none;
+		padding: 0;
+		margin: 0; 
+	}
+
+	&__item {
+		position: relative;
+		padding: 1em 1em .8em 1em;
+	    margin: .5em;
+    	box-shadow: 4px 4px 3px #bdb6b6;
+		background: #f1f1f1;
+		&-title {
+			font-weight: 700;
+			font-size: 1.5em;
+		}
+		&-author {
+			font-size: .9em;
+		    margin-bottom: 0;
+		}
+	}
+	
+	&__add {
+		margin-top: 1em;
+		margin-bottom: 1em; 		
+	}
+
+	&__btn-close {
+		position: absolute;
+		top: 1em;
+		right: 1em;
+		padding: 0;
+		color: #ffa500;
+		transition: color .5s;
+		&:hover {
+			color: #39bb39;
+		}
+	}
+
+	&__btn-delete {
+		position: absolute;
+		top: 1em;
+		right: 4em;
+		padding: 0;
+		color: #999999;
+		transition: color .5s;
+		&:hover {
+			color: #ea5b5b;
+		}
+	}
+
+	&__btn-completed {
+		position: absolute;
+		top: 1em;
+		right: 1em;
+		padding: 0;
+		color: #39bb39;
+	}
+
+}

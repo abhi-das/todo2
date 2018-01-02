@@ -1,0 +1,73 @@
+<div class="container">
+	<!-- Login User Info -->
+	<div class="row text-right">
+		<a class="btn btn-link" (click)="onLogoff()">Logout </a>
+		<p>{{logInUser}} <i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i></p>
+	</div>
+	<div class="row task">
+		<!-- Task In Progress -->
+		<div class="col-md-6">
+			<div class="task-column">
+				<h2 class="task__status-progress">
+					In Progress
+				</h2>
+				<!-- Task List -->
+				<ul class="task__task-list" *ngIf="inCompletedTaskLs">
+					
+					<!-- Display Existing Task List -->
+
+					<li class="task__item" *ngFor="let task of inCompletedTaskLs; let idx = index;">
+						<p class="task__item-title">{{task.title}}</p>
+						<div class="task__item-description" [innerHTML]="task.description"></div>
+						<p class="task__item-author text-right text-info">
+							{{logInUser}}
+							<i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
+						</p>
+						<button type="button" class="btn btn-sm btn-link task__btn-delete"
+							(click)="onTaskDelete(idx)">
+							<i class="fa fa-trash-o fa-2x"></i>
+						</button>
+						<button type="button" class="btn btn-sm btn-link task__btn-close"
+							(click)="onTaskComplete(idx)">
+							<i class="fa fa-check-square-o fa-2x"></i>
+						</button>						
+					</li>
+					
+					<!-- Add Task Inline Editor -->
+
+					<li class="task__item" *ngIf="isAdd">
+						<add-new-task (cancelEvent)="isCancelFunc($event)" (addTaskEvent)="onAddNewTask()"></add-new-task>
+					</li>
+
+				</ul>
+				<!-- Add Task -->
+				<div class="text-center" *ngIf="!isAdd">
+					<button type="button" class="task__add btn btn-link" 
+						(click)="onAddEnable()">(Add new task)</button>
+				</div>
+			</div>
+		</div>
+		<!-- Task Completed -->
+		<div class="col-md-6">
+			<div class="task-column">
+				<h2 class="task__status-complete">
+					Completed
+				</h2>
+				<!-- Task List -->
+				<ul class="task__task-list" *ngIf="completedTaskLs">
+					<li class="task__item" *ngFor="let task of completedTaskLs; let idx = index;">
+						<p class="task__item-title">{{task.title}}</p>
+						<div class="task__item-description" [innerHTML]="task.description"></div>
+						<p class="task__item-author text-right text-info">
+							{{logInUser}}
+							<i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i></p>
+						<button type="button" class="btn btn-sm btn-link task__btn-completed" 
+									(click)="onTaskClose(idx)">
+							<i class="fa fa-check-square fa-2x"></i></button>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+ </div>
