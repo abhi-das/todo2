@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 		this._LoginSrv.userLogin(userLoginData).subscribe(
 			res => {
 				
-				console.log(res);
+				// console.log(res);
 
 				if(res.status === 'success') {
 					this._LoginSrv.setLoginUser(res);
