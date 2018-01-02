@@ -81,6 +81,22 @@ export class TaskService {
 	}
 
 	/*
+	 * @func getTaskById()
+	 * @param id: index of incomplete task which is now completed
+	 * @return void
+	 * @purpose update complete and incomplete task list observables
+	*/
+	// getTaskById(id:number): void {
+
+	// 	let onTaskComp = this.inComp.subscribe(taskItm => {
+	// 		this.comp.subscribe( task => task.push(taskItm[id]));
+	// 		taskItm.splice(id,1);
+	// 	});
+
+	// 	onTaskComp.unsubscribe();
+	// }
+
+	/*
 	 * @func changeTaskStatus()
 	 * @param id: index of incomplete task which is now completed
 	 * @return void
@@ -118,7 +134,7 @@ export class TaskService {
 	 * @return void
 	 * @purpose update completed task list on task close
 	*/
-	taskDelete(id:number): Observable<any> {
+	taskDelete(id:number):Observable<any> {
 
 		let taskId: any = {"id": id};
 		
@@ -134,13 +150,13 @@ export class TaskService {
 	 * @return incompleteTaskLs[]
 	 * @purpose update incompleted task list Observerables
 	*/
-	updateTaskList(task: TaskModel):void {
+	addTask(task: TaskModel):Observable<any> {
 
+		// console.log(task);
 		// Make pdate Http call
-		let subIncomp = this.inComp.subscribe(taskItm => {
-			taskItm.push(task);
-		});
-
-		subIncomp.unsubscribe();
+		return this._http.put(`/todo?sessionId=${this.sessionId}`, task)
+			.map((response: Response) => {
+			    return response.json()
+			});
 	}
 }

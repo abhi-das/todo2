@@ -57,17 +57,27 @@ export class AddNewTaskComponent implements OnInit {
 	onAddTask(): void {
 
 		let obj = {
-			status: "notCompleted", 
-    		author: this._LoginSrv.getLoginUser()
+			status: "notCompleted"
 		};
 
 		let newData = Object.assign(obj, this.addNewTaskForm.value);
 
 		let taskMod = new TaskModel().deserialize(newData)
 
-		this._taskSrv.updateTaskList(taskMod);
-
-		this.addTaskEvent.emit();
+		this._taskSrv.addTask(taskMod).subscribe(
+			res => {
+				if(res.status === 'success') {
+					console.log('AddTask successful! ', res);
+					this.addTaskEvent.emit();
+				} else {
+					console.log('AddTask failed! ', res);	
+				}
+			}, 
+			err => {
+				console.log('AddTask not possible! ', err);
+			},
+			() => {
+				console.log('AddTask complete!');
+		});
 	}
-
 }

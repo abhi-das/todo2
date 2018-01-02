@@ -104,6 +104,11 @@ export class DashboardComponent implements OnInit {
 	*/
 	onAddEnable(): void {
 		this.isAdd = true;
+		// let subIncomp = this.inComp.subscribe(taskItm => {
+		// 	taskItm.push(task);
+		// });
+
+		// subIncomp.unsubscribe();
 	}
 
 	/*
@@ -130,21 +135,25 @@ export class DashboardComponent implements OnInit {
 	 * @func onTaskDelete()
 	 * @return void
 	 * @param isCancel: If user has cancel to new task window
-	 * Hide add new task window without adding new task to the task list
+	 * Hide add new task window without adding new task to the task listnumber
 	*/
-	onTaskDelete(idx:number): void {
+	onTaskDelete(task:TaskModel): void {
 
-		this._taskSrv.taskDelete(idx).subscribe(
+		let taskId = task.author['_id'];
+
+		this._taskSrv.taskDelete(taskId).subscribe(
+
 			res => {
-				
-				console.log('Delete SuccessFul!');
-
-				// update local variable
-				let deleteIncomp = this._taskSrv.inComp.subscribe(taskItm => {
-					taskItm.splice(idx, 1);
-				});
-
-				deleteIncomp.unsubscribe();
+				if(res.status === 'success') {
+					console.log('Delete SuccessFul!', res);
+					// update local variable
+					// let deleteIncomp = this._taskSrv.inComp.subscribe(taskItm => {
+					// 	taskItm.splice(idx, 1);
+					// });
+					// deleteIncomp.unsubscribe();
+				} else {
+					console.log('Delete Fail!', res);
+				}
 			},
 			err => {
 				console.log("Delete not possible! ", err);
@@ -166,12 +175,17 @@ export class DashboardComponent implements OnInit {
 		
 		this._loginSrv.userLogOut().subscribe(
 			res => {
-				this.completedTaskLs = [];
-				this.inCompletedTaskLs = [];
-				this._router.navigate(['/login']);
 
-				this._loginSrv.setLoginUser(null);
-				console.log('logoff successful! ', res);
+				if(res.status === 'success') {
+					this.completedTaskLs = [];
+					this.inCompletedTaskLs = [];
+					this._router.navigate(['/login']);
+
+					this._loginSrv.setLoginUser(null);
+					console.log('logoff successful! ', res);
+				} else {
+					console.log('LogOff error! ', res);
+				}
 			}, 
 			err => {
 				console.log('LogOff not possible! ', err);
