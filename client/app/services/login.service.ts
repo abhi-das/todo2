@@ -46,7 +46,9 @@ export class LoginService {
 	 * @return username
 	*/
 	getLoginUser():string {
-		return this.user['username'];
+
+		let userNm = localStorage.getItem('logUser');
+		return userNm['username'];
 	}
 
 	/*
@@ -63,6 +65,9 @@ export class LoginService {
 	 * @param userId: set login user id
 	*/
 	setLoginUser(user: any): void {
-		this.user = user;
+
+		localStorage.setItem('logUser', logUser);
+
+		return this.user = user;
 	}
 }
