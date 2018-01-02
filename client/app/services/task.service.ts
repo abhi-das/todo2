@@ -121,7 +121,11 @@ export class TaskService {
 	taskDelete(id:number): Observable<any> {
 
 		let taskId: any = {"id": id};
-		return this._http.delete(`/todo?sessionId=${this.sessionId}`, taskId);
+		
+		return this._http.delete(`/todo?sessionId=${this.sessionId}`, taskId)
+			.map((response: Response) => {
+			    return response.json()
+			});
 	}
 
 	/*

@@ -139,11 +139,12 @@ export class DashboardComponent implements OnInit {
 				
 				console.log('Delete SuccessFul!');
 
-				// let deleteIncomp = this.inComp.subscribe(taskItm => {
-				// 	taskItm.splice(id, 1);
-				// });
+				// update local variable
+				let deleteIncomp = this._taskSrv.inComp.subscribe(taskItm => {
+					taskItm.splice(idx, 1);
+				});
 
-				// deleteIncomp.unsubscribe();
+				deleteIncomp.unsubscribe();
 			},
 			err => {
 				console.log("Delete not possible! ", err);
