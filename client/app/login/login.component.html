@@ -34,8 +34,8 @@
           <button type="submit" class="btn btn-lg btn-primary btn-block"
               [disabled]="!loginForm.valid">Log in</button>
 
-          <div class="login-form__login-fail text-left text-danger" *ngIf="isLoginFail">
-            <p>{{htttpFailRes.statusText}}!</p>
+          <div class="login-form__login-fail text-left text-danger" *ngIf="htttpFailRes">
+            <p>{{htttpFailRes}}!</p>
           </div>
         </form>
     </div>

@@ -25,7 +25,7 @@ export class LoginService {
 	 * @return login userData
 	 * @param userFormData to make POST call
 	*/
-	userLogin(userFormData: UserLoginModel): Observable<string> {
+	userLogin(userFormData: UserLoginModel): Observable<any> {
 
 		return this._httpClient.post<any>("/user/auth", userFormData);
 	}

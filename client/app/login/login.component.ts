@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
 	 * Local variable declaration
 	*/
 	loginForm: FormGroup;
-	isLoginFail: boolean;
 	htttpFailRes: object;
 
 	constructor(private _route: Router, private _LoginSrv: LoginService) {}
@@ -47,18 +46,19 @@ export class LoginComponent implements OnInit {
 
 		this._LoginSrv.userLogin(userLoginData).subscribe(
 			res => {
-				// console.log(res);
-				this._LoginSrv.setLoginUser(res);
-				this._route.navigate(['/dashboard']);
+				
+				console.log(res);
+
+				if(res.status === 'success') {
+					this._LoginSrv.setLoginUser(res);
+					this._route.navigate(['/dashboard']);
+				} else {
+					this.htttpFailRes = res.error;
+				}
 			},
 			err => {
-				this.isLoginFail = true;
 				this.htttpFailRes = err;
-				// console.log('Fail http call  >>> ', err);
-			},
-			() => {
-				// Animatation and redirect the page
-				console.log('Http call completed!');
+				console.log('http call fail  >>> ', err);
 			});
 	}
 }
