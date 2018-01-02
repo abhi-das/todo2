@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UserLoginModel } from '../models/user.login.model';
+import { Http, Response } from '@angular/http';
 
 @Injectable()
 
@@ -19,9 +20,25 @@ export class LoginService {
 
 	constructor(private _httpClient: HttpClient) {}
 
-	userLogin(userData: UserLoginModel): Observable<string> {
+	/*
+	 * @func userLogin()
+	 * @return login userData
+	 * @param userFormData to make POST call
+	*/
+	userLogin(userFormData: UserLoginModel): Observable<string> {
 
-		return this._httpClient.post<any>("/user/auth", userData);
+		return this._httpClient.post<any>("/user/auth", userFormData);
+	}
+
+	/*
+	 * @func userLogOut()
+	 * @return logout Response Observable
+	 * @method call getSessionId() to get sessionId  
+	*/
+	userLogOut(): Observable<any> {
+
+		let sessionId = this.getSessionId();
+		return this._httpClient.get(`/user/logout?sessionId=${sessionId}`);
 	}
 
 	/*
@@ -45,7 +62,7 @@ export class LoginService {
 	 * @return void
 	 * @param userId: set login user id
 	*/
-	setLoginUser(user): void {
+	setLoginUser(user: any): void {
 		this.user = user;
 	}
 }

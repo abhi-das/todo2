@@ -140,11 +140,28 @@ export class DashboardComponent implements OnInit {
 	/*
 	 * @func onLogoff()
 	 * @return void
+	 * @method userLogOut() from _loginSrv
+	 * If logout successful clear out tasklist Array and 
+	 * @method If logout successful send null to setLoginUser() to _loginSrv
+	 * If logout fail throw error on page
 	*/
 	onLogoff(): void {
-		this.completedTaskLs = [];
-		this.inCompletedTaskLs = [];
-		this._router.navigate(['/login']);
+		
+		this._loginSrv.userLogOut().subscribe(
+			res => {
+				this.completedTaskLs = [];
+				this.inCompletedTaskLs = [];
+				this._router.navigate(['/login']);
+
+				this._loginSrv.setLoginUser(null);
+				console.log('logoff successful! ', res);
+			}, 
+			err => {
+				console.log('LogOff not possible! ', err);
+			},
+			() => {
+				console.log('logoff complete!');
+		});		
 	}
 
 	/*
