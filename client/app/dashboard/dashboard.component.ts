@@ -134,7 +134,23 @@ export class DashboardComponent implements OnInit {
 	*/
 	onTaskDelete(idx:number): void {
 
-		this._taskSrv.taskDelete(idx);
+		this._taskSrv.taskDelete(idx).subscribe(
+			res => {
+				
+				console.log('Delete SuccessFul!');
+
+				// let deleteIncomp = this.inComp.subscribe(taskItm => {
+				// 	taskItm.splice(id, 1);
+				// });
+
+				// deleteIncomp.unsubscribe();
+			},
+			err => {
+				console.log("Delete not possible! ", err);
+			},
+			() => {
+				console.log('Delete SucccessFul!');
+		});
 	}
 
 	/*

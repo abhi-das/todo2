@@ -118,14 +118,10 @@ export class TaskService {
 	 * @return void
 	 * @purpose update completed task list on task close
 	*/
-	taskDelete(id:number): void {
+	taskDelete(id:number): Observable<any> {
 
-		// Make Delete Http call
-		let deleteIncomp = this.inComp.subscribe(taskItm => {
-			taskItm.splice(id, 1);
-		});
-
-		deleteIncomp.unsubscribe();
+		let taskId: any = {"id": id};
+		return this._http.delete(`/todo?sessionId=${this.sessionId}`, taskId);
 	}
 
 	/*
