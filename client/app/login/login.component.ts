@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
 import { UserLoginModel } from '../models/user.login.model';
+import 'rxjs/add/operator/catch';
 
 @Component({
   selector: 'login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 	*/
 	loginForm: FormGroup;
 	isLoginFail: boolean;
+	htttpFailRes: object;
 
 	constructor(private _route: Router, private _LoginSrv: LoginService) {}
 
@@ -34,17 +36,29 @@ export class LoginComponent implements OnInit {
 	/*
 	 * @func onAuth()
 	 * @return void
-	 * Redirect to dashboard page with the userid as route param
+	 * @method userLogin() from _LoginSrv API
+	 * If Auth successful redirect to dashboard page
+	 * If Auth fail show error message on Page
 	*/
 	onAuth():void {
 		
 		// console.log(">isValid>>",this.loginForm.valid);
 		let userLoginData = new UserLoginModel().deserialize(this.loginForm.value);
 
-		this._LoginSrv.userLogin(userLoginData).subscribe(res => {
-			console.log(res);
-			this._LoginSrv.setLoginUser(res);
-			this._route.navigate(['/dashboard']);
-		});
+		this._LoginSrv.userLogin(userLoginData).subscribe(
+			res => {
+				// console.log(res);
+				this._LoginSrv.setLoginUser(res);
+				this._route.navigate(['/dashboard']);
+			},
+			err => {
+				this.isLoginFail = true;
+				this.htttpFailRes = err;
+				// console.log('Fail http call  >>> ', err);
+			},
+			() => {
+				// Animatation and redirect the page
+				console.log('Http call completed!');
+			});
 	}
 }

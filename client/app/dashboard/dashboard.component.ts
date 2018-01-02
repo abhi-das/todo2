@@ -38,6 +38,10 @@ export class DashboardComponent implements OnInit {
 	 * @func ngOnInit()
 	 * @return void
 	 * Subscribe router param to show active user on the page
+	 * @method getLoginUser() from _LoginSrv API and display loged-in User on page
+	 * @method getTask() from _taskSrv API to fetch all the existing tasks from MongoDB
+	 * If Http call successful call retrieveTaskByFlag to create complete/incomplete task list and task on respective columns on the page
+	 * If Http fail show error message on Page
 	*/
 	ngOnInit():void {
 
@@ -47,7 +51,16 @@ export class DashboardComponent implements OnInit {
 
 		this.logInUser = this._loginSrv.getLoginUser();
 
-		this._taskSrv.getTask().subscribe(res => this.retrieveTaskByFlag(res));
+		this._taskSrv.getTask().subscribe(
+			res => {
+				this.retrieveTaskByFlag(res)
+			},
+			err => {
+				console.log('Http call fail! ', err);
+			},
+			() => {
+				console.log('Http call completed');
+			});
 	}
 
 	/*
