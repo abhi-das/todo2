@@ -152,7 +152,6 @@ export class TaskService {
 	*/
 	addTask(task: TaskModel):Observable<any> {
 
-		// console.log(task);
 		// Make pdate Http call
 		return this._http.put(`/todo?sessionId=${this.sessionId}`, task)
 			.map((response: Response) => {
