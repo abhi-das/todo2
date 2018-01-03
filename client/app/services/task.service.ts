@@ -5,7 +5,7 @@
  * @publish 01-01-2018
 */
 import { Injectable, OnInit } from '@angular/core';
-import { Http, Response, HttpModule } from '@angular/http';
+import { Http, Response, HttpModule, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -29,7 +29,15 @@ export class TaskService {
 	comp = this.compSource.asObservable();
 	sessionId: any;
 
-	constructor(private _http: Http, private _logInSrv: LoginService) {}
+	headers: Headers;
+    options: RequestOptions;
+
+	constructor(private _http: Http, private _logInSrv: LoginService) {
+
+		this.headers = new Headers({ 'Content-Type': 'application/json', 
+                                     'Accept': 'q=0.8;application/json;q=0.9' });
+        
+	}
 
 	/*
 	 * @func getTask()
@@ -75,26 +83,11 @@ export class TaskService {
 			this.compSource.next(tmpList);
 		} else {
 			this.inCompSource.next(tmpList);
+
 		}
 		
 		return tmpList;
 	}
-
-	/*
-	 * @func getTaskById()
-	 * @param id: index of incomplete task which is now completed
-	 * @return void
-	 * @purpose update complete and incomplete task list observables
-	*/
-	// getTaskById(id:number): void {
-
-	// 	let onTaskComp = this.inComp.subscribe(taskItm => {
-	// 		this.comp.subscribe( task => task.push(taskItm[id]));
-	// 		taskItm.splice(id,1);
-	// 	});
-
-	// 	onTaskComp.unsubscribe();
-	// }
 
 	/*
 	 * @func changeTaskStatus()
@@ -134,11 +127,16 @@ export class TaskService {
 	 * @return void
 	 * @purpose update completed task list on task close
 	*/
-	taskDelete(id:number):Observable<any> {
+	taskDelete(taskInfo: any):Observable<any> {
 
-		let taskId: any = {"id": id};
+		let sessionId = this.sessionId;
 		
-		return this._http.delete(`/todo?sessionId=${this.sessionId}`, taskId)
+		this.options = new RequestOptions({
+		 	headers: this.headers,
+		 	body: taskInfo
+		 });
+
+		return this._http.delete("/todo?sessionId="+ sessionId, this.options)
 			.map((response: Response) => {
 			    return response.json()
 			});

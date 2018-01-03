@@ -25,6 +25,7 @@
 						</p>
 						<button type="button" class="btn btn-sm btn-link task__btn-delete"
 							(click)="onTaskDelete(task)">
+							<span class="task__not-valid-user" *ngIf="isValidUser">Not valid user</span>
 							<i class="fa fa-trash-o fa-2x"></i>
 						</button>
 						<button type="button" class="btn btn-sm btn-link task__btn-close"

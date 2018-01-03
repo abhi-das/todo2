@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
 
 	logInUser: string;
 
+	isValidUser: boolean;
+
 	taskStatusFlag = {
 		completed: 'completed',
 		inCompleted: 'notCompleted',
@@ -51,7 +53,10 @@ export class DashboardComponent implements OnInit {
 
 		this._taskSrv.getTask().subscribe(
 			res => {
+
+				//Error Handling Need here
 				this.retrieveTaskByFlag(res)
+
 			},
 			err => {
 				console.log('Http call fail! ', err);
@@ -137,28 +142,48 @@ export class DashboardComponent implements OnInit {
 	*/
 	onTaskDelete(task:TaskModel): void {
 
-		let taskId = task.author['_id'];
+		let taskDeleteInfo: any = {
+			"id": task['_id'], 
+			"author": task['author']
+		};
 
-		this._taskSrv.taskDelete(taskId).subscribe(
+		this._taskSrv.taskDelete(taskDeleteInfo).subscribe(
 
 			res => {
 				if(res.status === 'success') {
-					console.log('Delete SuccessFul!', res);
-					// update local variable
-					// let deleteIncomp = this._taskSrv.inComp.subscribe(taskItm => {
-					// 	taskItm.splice(idx, 1);
-					// });
-					// deleteIncomp.unsubscribe();
+					// console.log('Delete SuccessFul!', res);
+
+					this._taskSrv.inComp.subscribe((itask) => {
+						// console.log('existing.......',itask);
+						let deletedTaskRes = new TaskModel().deserialize(res.data);
+
+						itask.filter((ele, idx) => {
+							if(ele['_id'] === deletedTaskRes['_id']) {
+								itask.splice(idx, 1);
+								return;
+							}
+						})
+					});
+
 				} else {
-					console.log('Delete Fail!', res);
+					this.isValidUser = true;
+					this.onIntervel();
+					console.log('Not Authorised!', res);
 				}
 			},
 			err => {
 				console.log("Delete not possible! ", err);
-			},
-			() => {
-				console.log('Delete SucccessFul!');
-		});
+			});
+	}
+
+	/*
+	 * @func onIntervel()
+	 * @return void
+	*/
+	onIntervel(): void {
+		setTimeout(() => {
+			this.isValidUser = false;
+		}, 1000);
 	}
 
 	/*

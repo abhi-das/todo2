@@ -2,6 +2,7 @@ import { Deserializable } from './deserializable.model';
 
 export class TaskModel implements Deserializable<TaskModel> {
 
+	_id: string;
 	title: number;
 	description: string;
 	status: string;

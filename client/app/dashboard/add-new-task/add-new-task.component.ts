@@ -68,6 +68,14 @@ export class AddNewTaskComponent implements OnInit {
 			res => {
 				if(res.status === 'success') {
 					console.log('AddTask successful! ', res);
+
+					this._taskSrv.inComp.subscribe((itask) => {
+						// console.log('existing.......',itask);
+						let userTask = new TaskModel().deserialize(res.data);
+						itask.push(userTask);
+						// this._taskSrv.addNewIncompleteTask(userTask);
+					})
+
 					this.addTaskEvent.emit();
 				} else {
 					console.log('AddTask failed! ', res);	
