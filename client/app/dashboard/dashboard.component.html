@@ -17,19 +17,22 @@
 					<!-- Display Existing Task List -->
 
 					<li class="task__item" *ngFor="let task of inCompletedTaskLs; let idx = index;">
-						<p class="task__item-title">{{task.title}}</p>
-						<div class="task__item-description" [innerHTML]="task.description"></div>
+						<p class="task__item-title" [attr.data-meta]="task.title">{{task.title}}</p>
+						<div class="task__item-description" 
+							[attr.data-meta]="task.description"
+							[innerHTML]="task.description"></div>
 						<p class="task__item-author text-right text-info">
 							{{logInUser}}
 							<i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
 						</p>
 						<button type="button" class="btn btn-sm btn-link task__btn-delete"
+							[attr.data-meta]="'Not valid user'"
 							(click)="onTaskDelete(task)">
 							<span class="task__not-valid-user" *ngIf="isValidUser">Not valid user</span>
 							<i class="fa fa-trash-o fa-2x"></i>
 						</button>
 						<button type="button" class="btn btn-sm btn-link task__btn-close"
-							(click)="onTaskComplete(idx)">
+							(click)="onTaskComplete(idx)" [attr.data-meta]="'Mark as complete'">
 							<i class="fa fa-check-square-o fa-2x"></i>
 						</button>						
 					</li>
@@ -57,13 +60,16 @@
 				<!-- Task List -->
 				<ul class="task__task-list" *ngIf="completedTaskLs">
 					<li class="task__item" *ngFor="let task of completedTaskLs; let idx = index;">
-						<p class="task__item-title">{{task.title}}</p>
-						<div class="task__item-description" [innerHTML]="task.description"></div>
+						<p class="task__item-title" [attr.data-meta]="task.title">{{task.title}}</p>
+						<div class="task__item-description" 
+							[attr.data-meta]="task.description"
+							[innerHTML]="task.description"></div>
 						<p class="task__item-author text-right text-info">
 							{{logInUser}}
 							<i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i></p>
 						<button type="button" class="btn btn-sm btn-link task__btn-completed" 
-									(click)="onTaskClose(idx)">
+								[attr.data-meta]="'Remove from the list'"
+								(click)="onTaskClose(idx)">
 							<i class="fa fa-check-square fa-2x"></i></button>
 
 					</li>

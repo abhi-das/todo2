@@ -5,6 +5,8 @@ import { LoginService } from '../services/login.service';
 import { UserLoginModel } from '../models/user.login.model';
 import 'rxjs/add/operator/catch';
 
+import {Md5} from 'ts-md5/dist/md5';
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -38,11 +40,17 @@ export class LoginComponent implements OnInit {
 	 * @method userLogin() from _LoginSrv API
 	 * If Auth successful redirect to dashboard page
 	 * If Auth fail show error message on Page
+	 * MD5 encrypted password
 	*/
 	onAuth():void {
 		
 		// console.log(">isValid>>",this.loginForm.valid);
-		let userLoginData = new UserLoginModel().deserialize(this.loginForm.value);
+
+		let formData = this.loginForm.value;
+
+		formData['password'] = Md5.hashStr(this.loginForm.value['password']);
+
+		let userLoginData = new UserLoginModel().deserialize(formData);
 
 		this._LoginSrv.userLogin(userLoginData).subscribe(
 			res => {
