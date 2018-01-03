@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UserLoginModel } from '../models/user.login.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Injectable()
 
@@ -26,6 +27,8 @@ export class LoginService {
 	*/
 	userLogin(userFormData: UserLoginModel): Observable<any> {
 
+		userFormData['password'] = Md5.hashStr(userFormData['password']);
+		
 		return this._http.post("/user/auth", userFormData)
 				.map((res: Response) => {
 					return res.json();

@@ -1,5 +1,18 @@
 # Todoapp
+**************************************
+## Run local JSON data
+npm install
+npm start
 
+## Run on API Server
+ng build
+npm run apiserver
+
+## Run test cases and display code coverage
+ng test --code-coverage
+npm run codecoverage
+
+**************************************
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0.
 
 ## Development server
@@ -29,14 +42,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Validation
 http://embed.plnkr.co/9luTng/?show=preview
 
-## Run local JSON data
-npm install
-npm start
-
-## Run on API Server
-ng build
-npm run apiserver
-
-## Run test cases and display code coverage
-ng test --code-coverage
-npm run codecoverage

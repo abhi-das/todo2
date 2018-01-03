@@ -9,6 +9,8 @@ import { LoginService } from './login.service';
 import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { UserLoginModel } from '../models/user.login.model';
+import {Md5} from 'ts-md5/dist/md5';
 
 describe('LoginService service', () => {
 
@@ -51,7 +53,10 @@ describe('LoginService service', () => {
 			});
 	      
 	    // test userLogin @method from LoginService
-		service.userLogin({username:"ali", password:"5f4dcc3b5aa765d61d8327deb882cf99"})
+	    let formData = {username:"ali", password:"password"};
+	    let userLoginData = new UserLoginModel().deserialize(formData);
+
+		service.userLogin(userLoginData)
 			.subscribe(res => {
 			  expect(res.username).toBe('ali');
 			  expect(res.status).toBe('success');

@@ -45,12 +45,7 @@ export class LoginComponent implements OnInit {
 	onAuth():void {
 		
 		// console.log(">isValid>>",this.loginForm.valid);
-
-		let formData = this.loginForm.value;
-
-		formData['password'] = Md5.hashStr(this.loginForm.value['password']);
-
-		let userLoginData = new UserLoginModel().deserialize(formData);
+		let userLoginData = new UserLoginModel().deserialize(this.loginForm.value);
 
 		this._LoginSrv.userLogin(userLoginData).subscribe(
 			res => {
