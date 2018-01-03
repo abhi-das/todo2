@@ -15,36 +15,36 @@ import { AddNewTaskComponent } from './add-new-task/add-new-task.component';
 import { Http, Response, HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
-describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+// describe('DashboardComponent', () => {
+//   let component: DashboardComponent;
+//   let fixture: ComponentFixture<DashboardComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        HttpModule,
-        HttpClientModule
-      ], 
-      declarations: [
-        DashboardComponent,
-        AddNewTaskComponent
-      ],
-      providers: [ TaskService, LoginService ]
-    })
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({
+//       imports: [
+//         RouterTestingModule,
+//         FormsModule,
+//         ReactiveFormsModule,
+//         HttpModule,
+//         HttpClientModule
+//       ], 
+//       declarations: [
+//         DashboardComponent,
+//         AddNewTaskComponent
+//       ],
+//       providers: [ TaskService, LoginService ]
+//     })
 
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
-    component.ngOnInit();
-    fixture.detectChanges();
+//     fixture = TestBed.createComponent(DashboardComponent);
+//     component = fixture.componentInstance;
+//     component.ngOnInit();
+//     fixture.detectChanges();
 
-  });
+//   });
 
-  it('should create DashboardComponent', () => {
-    expect(component).toBeTruthy();
-  });
+//   it('should create DashboardComponent', () => {
+//     expect(component).toBeTruthy();
+//   });
 
 
-});
+// });

@@ -78,14 +78,14 @@ export class AddNewTaskComponent implements OnInit {
 
 					this.addTaskEvent.emit();
 				} else {
-					console.log('AddTask failed! ', res);	
+					// console.log('AddTask failed! ', res);	
 				}
 			}, 
 			err => {
-				console.log('AddTask not possible! ', err);
+				// console.log('AddTask not possible! ', err);
 			},
 			() => {
-				console.log('AddTask complete!');
+				// console.log('AddTask complete!');
 		});
 	}
 }
