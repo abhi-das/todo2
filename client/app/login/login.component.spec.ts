@@ -57,18 +57,18 @@ describe('LoginComponent', () => {
     expect(passwordEle.valid).toBeFalsy();
   })
 
-  // it('Submit a form data and match the user filled values ', () => {
-  //   expect(component.loginForm.valid).toBeFalsy();
-  //   component.loginForm.controls['username'].setValue('abc');
-  //   component.loginForm.controls['password'].setValue('password123');
+  it('Submit a form data and match the user filled values ', () => {
+    expect(component.loginForm.valid).toBeFalsy();
+    component.loginForm.controls['username'].setValue('abc');
+    component.loginForm.controls['password'].setValue('password123');
 
-  //   let formData = component.loginForm.value;
-  //   component.onAuth();
+    let formData = component.loginForm.value;
+    component.onAuth();
 
-  //   expect(formData['username']).toBe('abc');
-  //   expect(formData['password']).toBe('password123');
+    expect(formData['username']).toBe('abc');
+    expect(formData['password']).toBe('password123');
 
-  // })
+  })
 
   // Add one more case for redirect after form submit
 

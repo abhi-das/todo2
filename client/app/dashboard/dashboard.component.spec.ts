@@ -38,6 +38,7 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     component.ngOnInit();
+    fixture.detectChanges();
 
   });
 

@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "apiserver": "node index.js",
+    "testandreport": "ng test --code-coverage",
     "codecoverage": "http-server -c-1 -o -p 9875 ./coverage"
   },
   "author": "abhishek das",
