@@ -32,12 +32,7 @@ export class TaskService {
 	headers: Headers;
     options: RequestOptions;
 
-	constructor(private _http: Http, private _logInSrv: LoginService) {
-
-		this.headers = new Headers({ 'Content-Type': 'application/json', 
-                                     'Accept': 'q=0.8;application/json;q=0.9' });
-        
-	}
+	constructor(private _http: Http, private _logInSrv: LoginService) {}
 
 	/*
 	 * @func getTask()
@@ -130,6 +125,9 @@ export class TaskService {
 	taskDelete(taskInfo: any):Observable<any> {
 
 		let sessionId = this.sessionId;
+
+		this.headers = new Headers({ 'Content-Type': 'application/json', 
+                                     'Accept': 'q=0.8;application/json;q=0.9' });
 		
 		this.options = new RequestOptions({
 		 	headers: this.headers,

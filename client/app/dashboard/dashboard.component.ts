@@ -168,11 +168,11 @@ export class DashboardComponent implements OnInit {
 				} else {
 					this.isValidUser = true;
 					this.onIntervel();
-					console.log('Not Authorised!', res);
+					// console.log('Not Authorised!', res);
 				}
 			},
 			err => {
-				console.log("Delete not possible! ", err);
+				// console.log("Delete not possible! ", err);
 			});
 	}
 
