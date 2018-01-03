@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit {
 		this._LoginSrv.userLogin(userLoginData).subscribe(
 			res => {
 				
-				// console.log(res);
-
 				if(res.status === 'success') {
 					this._LoginSrv.setLoginUser(res);
 					this._route.navigate(['/dashboard']);
@@ -57,8 +55,8 @@ export class LoginComponent implements OnInit {
 				}
 			},
 			err => {
-				this.htttpFailRes = err;
-				console.log('http call fail  >>> ', err);
+				this.htttpFailRes = err.status;
+				console.log('http call fail  >>> ', err.status);
 			});
 	}
 }

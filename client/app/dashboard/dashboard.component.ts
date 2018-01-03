@@ -16,8 +16,6 @@ export class DashboardComponent implements OnInit {
 	/*
 	 * Local variable declaration
 	*/
-	private routerSubs: any;
-
 	isAdd: boolean;
 
 	logInUser: string;
@@ -49,7 +47,7 @@ export class DashboardComponent implements OnInit {
 		this.completedTaskLs = [];
 		this.inCompletedTaskLs = [];
 
-		this.logInUser = this._loginSrv.getLoginUser();
+		this.logInUser = this._loginSrv.getLoginUser()['username'];
 
 		this._taskSrv.getTask().subscribe(
 			res => {
@@ -175,33 +173,20 @@ export class DashboardComponent implements OnInit {
 		
 		this._loginSrv.userLogOut().subscribe(
 			res => {
-
+				// console.log(res.status);
 				if(res.status === 'success') {
+
 					this.completedTaskLs = [];
 					this.inCompletedTaskLs = [];
 					this._router.navigate(['/login']);
-
-					this._loginSrv.setLoginUser(null);
-					console.log('logoff successful! ', res);
+					this._loginSrv.clearLoginUser();
+					// console.log('logoff successful! ', res);
 				} else {
-					console.log('LogOff error! ', res);
+					// console.log('LogOff error! ', res);
 				}
 			}, 
 			err => {
-				console.log('LogOff not possible! ', err);
-			},
-			() => {
-				console.log('logoff complete!');
-		});		
+				// console.log('LogOff not possible! ', err);
+			});		
 	}
-
-	/*
-	 * @func ngOnDestroy()
-	 * @return void
-	 * Unsubscribe router param
-	*/
-	ngOnDestroy():void {
-		this.routerSubs.unsubscribe();
-	}
-
 }

@@ -5,12 +5,11 @@
  * @publish 01-01-2018
 */
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Http, Response } from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UserLoginModel } from '../models/user.login.model';
-import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 
@@ -18,7 +17,7 @@ export class LoginService {
 
 	user: any;
 
-	constructor(private _httpClient: HttpClient) {}
+	constructor(private _http: Http) {}
 
 	/*
 	 * @func userLogin()
@@ -27,7 +26,10 @@ export class LoginService {
 	*/
 	userLogin(userFormData: UserLoginModel): Observable<any> {
 
-		return this._httpClient.post<any>("/user/auth", userFormData);
+		return this._http.post("/user/auth", userFormData)
+				.map((res: Response) => {
+					return res.json();
+				});
 	}
 
 	/*
@@ -38,17 +40,19 @@ export class LoginService {
 	userLogOut(): Observable<any> {
 
 		let sessionId = this.getSessionId();
-		return this._httpClient.get(`/user/logout?sessionId=${sessionId}`);
+		return this._http.get(`/user/logout?sessionId=${sessionId}`)
+				.map((res: Response) => {
+					return res.json();
+				});;
 	}
 
 	/*
 	 * @func getLoginUser()
 	 * @return username
 	*/
-	getLoginUser():string {
-
-		let userNm = localStorage.getItem('logUser');
-		return userNm['username'];
+	getLoginUser():any {
+		let user = JSON.parse(localStorage.getItem('logUser'));
+		return user;
 	}
 
 	/*
@@ -56,18 +60,24 @@ export class LoginService {
 	 * @return sessionId
 	*/
 	getSessionId():any {
-		return this.user['sessionId'];
+		let user = this.getLoginUser();
+		return user['sessionId'];
 	}
 
 	/*
 	 * @func setLoginUser()
 	 * @return void
-	 * @param userId: set login user id
+	 * @param user: set login user
 	*/
 	setLoginUser(user: any): void {
+		localStorage.setItem('logUser', JSON.stringify(user));
+	}
 
-		localStorage.setItem('logUser', logUser);
-
-		return this.user = user;
+	/*
+	 * @func clearLoginUser()
+	 * @return void
+	*/
+	clearLoginUser(): void {
+		localStorage.clear();
 	}
 }
