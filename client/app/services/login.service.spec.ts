@@ -14,52 +14,61 @@ import {Md5} from 'ts-md5/dist/md5';
 
 describe('LoginService service', () => {
 
-	let loginService: LoginService;
-	let backend: MockBackend;
+    let loginService: LoginService;
+    let backend: MockBackend;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			imports: [
-				HttpModule,
-				FormsModule,
-				ReactiveFormsModule
-			],
-			providers: [
-				LoginService,
-				{ provide: XHRBackend, useClass: MockBackend }
-			]
-		});
-		TestBed.compileComponents();
-	}));
- 
-	it('Should create LoginService!', inject([LoginService], (LoginService) => {
-
-		expect(LoginService).toBeDefined();
-
-	}));
-
-	it('should log in the user and cache login details',
-	    inject([LoginService, XHRBackend], (service: LoginService, mockBacked: MockBackend) => {
-			// subscribe to connections to mock backend
-			mockBacked.connections.subscribe((connection: MockConnection) => {
-				// call mock respond of the connection
-				// send in a Response Object
-				connection.mockRespond(new Response(
-					// pass in new isntance of Response Options
-					new ResponseOptions({
-						body: {status:"success", sessionId:"a8t9Rr9bjWD2InfeFLbNS3FNg5mnFqiV", username:"ali"}
-					})
-				));
-			});
-	      
-	    // test userLogin @method from LoginService
-	    let formData = {username:"ali", password:"password"};
-	    let userLoginData = new UserLoginModel().deserialize(formData);
-
-		service.userLogin(userLoginData)
-			.subscribe(res => {
-			  expect(res.username).toBe('ali');
-			  expect(res.status).toBe('success');
-			});
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                HttpModule,
+                FormsModule,
+                ReactiveFormsModule
+            ],
+            providers: [
+                LoginService, {
+                    provide: XHRBackend,
+                    useClass: MockBackend
+                }
+            ]
+        });
+        TestBed.compileComponents();
     }));
+
+    it('Should create LoginService!', inject([LoginService], (LoginService) => {
+
+        expect(LoginService).toBeDefined();
+
+    }));
+
+    it('should log in the user and cache login details',
+        inject([LoginService, XHRBackend], (service: LoginService, mockBacked: MockBackend) => {
+            // subscribe to connections to mock backend
+            mockBacked.connections.subscribe((connection: MockConnection) => {
+                // call mock respond of the connection
+                // send in a Response Object
+                connection.mockRespond(new Response(
+                    // pass in new isntance of Response Options
+                    new ResponseOptions({
+                        body: {
+                            status: "success",
+                            sessionId: "a8t9Rr9bjWD2InfeFLbNS3FNg5mnFqiV",
+                            username: "ali"
+                        }
+                    })
+                ));
+            });
+
+            // test userLogin @method from LoginService
+            let formData = {
+                username: "ali",
+                password: "password"
+            };
+            let userLoginData = new UserLoginModel().deserialize(formData);
+
+            service.userLogin(userLoginData)
+                .subscribe(res => {
+                    expect(res.username).toBe('ali');
+                    expect(res.status).toBe('success');
+                });
+        }));
 });

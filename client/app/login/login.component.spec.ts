@@ -15,61 +15,61 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+    let component: LoginComponent;
+    let fixture: ComponentFixture < LoginComponent > ;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        HttpModule,
-        HttpClientModule,
-        RouterTestingModule,
-        FormsModule,
-        ReactiveFormsModule
-      ], 
-      declarations: [
-        LoginComponent
-      ],
-      providers: [ LoginService ]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                HttpModule,
+                HttpClientModule,
+                RouterTestingModule,
+                FormsModule,
+                ReactiveFormsModule
+            ],
+            declarations: [
+                LoginComponent
+            ],
+            providers: [LoginService]
+        })
+
+        fixture = TestBed.createComponent(LoginComponent);
+        component = fixture.componentInstance;
+        component.ngOnInit();
+
+    });
+
+    it('should create LoginComponent', () => {
+        expect(component).toBeTruthy();
+    });
+
+    it('form invalid when empty', () => {
+        expect(component.loginForm.valid).toBeFalsy();
+    });
+
+    it('user name should not be empty', () => {
+        let usernameEle = component.loginForm.controls['username'];
+        expect(usernameEle.valid).toBeFalsy();
     })
 
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    component.ngOnInit();
+    it('password should not be empty', () => {
+        let passwordEle = component.loginForm.controls['password'];
+        expect(passwordEle.valid).toBeFalsy();
+    })
 
-  });
+    it('Submit a form data and match the user filled values ', () => {
+        expect(component.loginForm.valid).toBeFalsy();
+        component.loginForm.controls['username'].setValue('abc');
+        component.loginForm.controls['password'].setValue('password');
 
-  it('should create LoginComponent', () => {
-    expect(component).toBeTruthy();
-  });
+        let formData = component.loginForm.value;
+        component.onAuth();
 
-  it('form invalid when empty', () => {
-      expect(component.loginForm.valid).toBeFalsy();
-  });
+        expect(formData['username']).toBe('abc');
+        expect(formData['password']).toBe('password');
 
-  it('user name should not be empty', () => {
-    let usernameEle = component.loginForm.controls['username'];
-    expect(usernameEle.valid).toBeFalsy();
-  })
+    })
 
-  it('password should not be empty', () => {
-    let passwordEle = component.loginForm.controls['password'];
-    expect(passwordEle.valid).toBeFalsy();
-  })
-
-  it('Submit a form data and match the user filled values ', () => {
-    expect(component.loginForm.valid).toBeFalsy();
-    component.loginForm.controls['username'].setValue('abc');
-    component.loginForm.controls['password'].setValue('password');
-
-    let formData = component.loginForm.value;
-    component.onAuth();
-
-    expect(formData['username']).toBe('abc');
-    expect(formData['password']).toBe('password');
-
-  })
-
-  // Add one more case for redirect after form submit
+    // Add one more case for redirect after form submit
 
 });

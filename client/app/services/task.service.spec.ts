@@ -13,28 +13,30 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 
 describe('TaskService service', () => {
 
-	let taskService: TaskService;
-	let backend: MockBackend;
+    let taskService: TaskService;
+    let backend: MockBackend;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			imports: [
-				HttpModule,
-				FormsModule,
-				ReactiveFormsModule
-			],
-			providers: [
-				TaskService, LoginService,
-				{ provide: XHRBackend, useClass: MockBackend }
-			]
-		});
-		TestBed.compileComponents();
-	}));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                HttpModule,
+                FormsModule,
+                ReactiveFormsModule
+            ],
+            providers: [
+                TaskService, LoginService, {
+                    provide: XHRBackend,
+                    useClass: MockBackend
+                }
+            ]
+        });
+        TestBed.compileComponents();
+    }));
 
-	it('Should create TaskServices !', inject([TaskService], (TaskService) => {
+    it('Should create TaskServices !', inject([TaskService], (TaskService) => {
 
-		expect(TaskService).toBeDefined();
+        expect(TaskService).toBeDefined();
 
-	}));
-  
+    }));
+
 });

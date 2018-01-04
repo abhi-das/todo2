@@ -1,21 +1,21 @@
-import { Deserializable } from './deserializable.model';
+import { deserializable } from './deserializable.model';
 
-export class TaskModel implements Deserializable<TaskModel> {
+export class TaskModel implements Deserializable < TaskModel > {
 
-	_id: string;
-	title: number;
-	description: string;
-	status: string;
-	author: string;
+    _id: string;
+    title: number;
+    description: string;
+    status: string;
+    author: string;
 
-	/*
-	 * @func deserialize()
-	 * @param inputData: as TaskModel
-	 * @return TaskModel[]
-	 * @purpose combine all values and return as defined TaskModel object
-	*/
-	deserialize(inputData: any): TaskModel {
-		Object.assign(this, inputData);
-		return this;
-	}
+    /*
+     * @func deserialize()
+     * @param inputData: as TaskModel
+     * @return TaskModel[]
+     * @purpose combine all values and return as defined TaskModel object
+     */
+    deserialize(inputData: any): TaskModel {
+        Object.assign(this, inputData);
+        return this;
+    }
 }

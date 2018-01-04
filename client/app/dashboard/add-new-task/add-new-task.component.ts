@@ -5,87 +5,86 @@ import { TaskService } from '../../services/task.service';
 import { TaskModel } from '../../models/task-model';
 
 @Component({
-  selector: 'add-new-task',
-  templateUrl: './add-new-task.component.html',
-  styleUrls: ['./add-new-task.component.scss'],
-  outputs: ['cancelEvent', 'addTaskEvent']
+    selector: 'add-new-task',
+    templateUrl: './add-new-task.component.html',
+    styleUrls: ['./add-new-task.component.scss'],
+    outputs: ['cancelEvent', 'addTaskEvent']
 })
 export class AddNewTaskComponent implements OnInit {
 
-	/*
-	 * Local variable declaration
-	*/
-	private cancelEvent = new EventEmitter<boolean>();
-	private addTaskEvent = new EventEmitter();
+    /*
+     * Local variable declaration
+     */
+    private cancelEvent = new EventEmitter < boolean > ();
+    private addTaskEvent = new EventEmitter();
 
-	addNewTaskForm: FormGroup;
+    addNewTaskForm: FormGroup;
 
-	constructor(private _LoginSrv: LoginService, private _taskSrv: TaskService) { }
+    constructor(private _LoginSrv: LoginService, private _taskSrv: TaskService) {}
 
-	/*
-	 * @func ngOnInit()
-	 * @return void
-	 * Subscribe router param to show active user on the page
-	*/
-	ngOnInit() {
+    /*
+     * @func ngOnInit()
+     * @return void
+     * Subscribe router param to show active user on the page
+     */
+    ngOnInit() {
 
-		this.addNewTaskForm = new FormGroup({
-			title: new FormControl('', Validators.required),
-			description: new FormControl('', Validators.required)
-		});
-	}
+        this.addNewTaskForm = new FormGroup({
+            title: new FormControl('', Validators.required),
+            description: new FormControl('', Validators.required)
+        });
+    }
 
-	/*
-	 * @func onCancel()
-	 * @return void
-	 * Emit cancel event to parent component to notify the user has cancel the action
-	*/
-	onCancel(): void {
-		this.cancelEvent.emit(false);
-	}
+    /*
+     * @func onCancel()
+     * @return void
+     * Emit cancel event to parent component to notify the user has cancel the action
+     */
+    onCancel(): void {
+        this.cancelEvent.emit(false);
+    }
 
-	/*
-	 * @func onAddTask()
-	 * @return void
-	 * Add new task to the task list
-	 * @variable obj: static task format
-	 * @variable newData: Merge static obj and user form data
-	 * @variable taskMod: deserialize the newData object
-	 * Emit addTaskEvent to the parent component to update incomplete task list Observerables
-	 * 
-	*/
-	onAddTask(): void {
+    /*
+     * @func onAddTask()
+     * @return void
+     * Add new task to the task list
+     * @variable obj: static task format
+     * @variable newData: Merge static obj and user form data
+     * @variable taskMod: deserialize the newData object
+     * Emit addTaskEvent to the parent component to update incomplete task list Observerables
+     *
+     */
+    onAddTask(): void {
 
-		let obj = {
-			status: "notCompleted"
-		};
+        let obj = {
+            status: "notCompleted"
+        };
 
-		let newData = Object.assign(obj, this.addNewTaskForm.value);
+        let newData = Object.assign(obj, this.addNewTaskForm.value);
 
-		let taskMod = new TaskModel().deserialize(newData)
+        let taskMod = new TaskModel().deserialize(newData)
 
-		this._taskSrv.addTask(taskMod).subscribe(
-			res => {
-				if(res.status === 'success') {
-					console.log('AddTask successful! ', res);
+        this._taskSrv.addTask(taskMod).subscribe(
+            res => {
+                if (res.status === 'success') {
+                    console.log('AddTask successful! ', res);
 
-					this._taskSrv.inComp.subscribe((itask) => {
-						// console.log('existing.......',itask);
-						let userTask = new TaskModel().deserialize(res.data);
-						itask.push(userTask);
-						// this._taskSrv.addNewIncompleteTask(userTask);
-					})
+                    this._taskSrv.inComp.subscribe((itask) => {
+                        // console.log('existing.......',itask);
+                        let userTask = new TaskModel().deserialize(res.data);
+                        itask.push(userTask);
+                        // this._taskSrv.addNewIncompleteTask(userTask);
+                    })
 
-					this.addTaskEvent.emit();
-				} else {
-					// console.log('AddTask failed! ', res);	
-				}
-			}, 
-			err => {
-				// console.log('AddTask not possible! ', err);
-			},
-			() => {
-				// console.log('AddTask complete!');
-		});
-	}
+                    this.addTaskEvent.emit();
+                } else {
+                    // console.log('AddTask failed! ', res);	
+                }
+            },
+            err => {
+                // console.log('AddTask not possible! ', err);
+            }, () => {
+                // console.log('AddTask complete!');
+            });
+    }
 }

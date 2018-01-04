@@ -20,44 +20,43 @@ import { LocalRoutes } from './app.routing';
 
 describe('Router: App', () => {
 
-	let location: Location;
-	let router: Router;
-	let fixture;
+    let location: Location;
+    let router: Router;
+    let fixture;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({
-			imports: [
-				RouterTestingModule.withRoutes(LocalRoutes),
-				FormsModule,
-				ReactiveFormsModule
-			], 
-			declarations: [
-				AppComponent,
-				LoginComponent,
-				DashboardComponent,
-				AddNewTaskComponent
-			],
-			providers: [ LoginService, TaskService ]
-		});
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule.withRoutes(LocalRoutes),
+                FormsModule,
+                ReactiveFormsModule
+            ],
+            declarations: [
+                AppComponent,
+                LoginComponent,
+                DashboardComponent,
+                AddNewTaskComponent
+            ],
+            providers: [LoginService, TaskService]
+        });
 
-		router = TestBed.get(Router); 
-		location = TestBed.get(Location); 
+        router = TestBed.get(Router);
+        location = TestBed.get(Location);
 
-		fixture = TestBed.createComponent(AppComponent); 
-		router.initialNavigation(); 
-	});
+        fixture = TestBed.createComponent(AppComponent);
+        router.initialNavigation();
+    });
 
-	// it('navigate to "" redirects you to /login', fakeAsync(() => { 
-	//   router.navigate(['']); 
-	//   tick(); 
-	//   expect(location.path()).toBe('login'); 
-	// }));
+    // it('navigate to "" redirects you to /login', fakeAsync(() => { 
+    //   router.navigate(['']); 
+    //   tick(); 
+    //   expect(location.path()).toBe('login'); 
+    // }));
 
-	// it('navigate to "" redirects you to /login', fakeAsync(() => { 
-	//   router.navigate(['login']); 
-	//   tick(); 
-	//   expect(location.path()).toBe('login'); 
-	// }));
+    // it('navigate to "" redirects you to /login', fakeAsync(() => { 
+    //   router.navigate(['login']); 
+    //   tick(); 
+    //   expect(location.path()).toBe('login'); 
+    // }));
 
 });
-

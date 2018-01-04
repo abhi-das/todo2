@@ -16,71 +16,71 @@ import {Md5} from 'ts-md5/dist/md5';
 
 export class LoginService {
 
-	user: any;
+    user: any;
 
-	constructor(private _http: Http) {}
+    constructor(private _http: Http) {}
 
-	/*
-	 * @func userLogin()
-	 * @return login userData
-	 * @param userFormData to make POST call
-	*/
-	userLogin(userFormData: UserLoginModel): Observable<any> {
+    /*
+     * @func userLogin()
+     * @return login userData
+     * @param userFormData to make POST call
+     */
+    userLogin(userFormData: UserLoginModel): Observable < any > {
 
-		userFormData['password'] = Md5.hashStr(userFormData['password']);
-		
-		return this._http.post("/user/auth", userFormData)
-				.map((res: Response) => {
-					return res.json();
-				});
-	}
+        userFormData['password'] = Md5.hashStr(userFormData['password']);
 
-	/*
-	 * @func userLogOut()
-	 * @return logout Response Observable
-	 * @method call getSessionId() to get sessionId  
-	*/
-	userLogOut(): Observable<any> {
+        return this._http.post("/user/auth", userFormData)
+            .map((res: Response) => {
+                return res.json();
+            });
+    }
 
-		let sessionId = this.getSessionId();
-		return this._http.get(`/user/logout?sessionId=${sessionId}`)
-				.map((res: Response) => {
-					return res.json();
-				});;
-	}
+    /*
+     * @func userLogOut()
+     * @return logout Response Observable
+     * @method call getSessionId() to get sessionId
+     */
+    userLogOut(): Observable < any > {
 
-	/*
-	 * @func getLoginUser()
-	 * @return username
-	*/
-	getLoginUser():any {
-		let user = JSON.parse(localStorage.getItem('logUser'));
-		return user;
-	}
+        let sessionId = this.getSessionId();
+        return this._http.get(`/user/logout?sessionId=${sessionId}`)
+            .map((res: Response) => {
+                return res.json();
+            });;
+    }
 
-	/*
-	 * @func getSessionId()
-	 * @return sessionId
-	*/
-	getSessionId():any {
-		let user = this.getLoginUser();
-		return user['sessionId'];
-	}
+    /*
+     * @func getLoginUser()
+     * @return username
+     */
+    getLoginUser(): any {
+        let user = JSON.parse(localStorage.getItem('logUser'));
+        return user;
+    }
 
-	/*
-	 * @func setLoginUser()
-	 * @return void
-	 * @param user: set login user
-	*/
-	setLoginUser(user: any): void {
-		localStorage.setItem('logUser', JSON.stringify(user));
-	}
+    /*
+     * @func getSessionId()
+     * @return sessionId
+     */
+    getSessionId(): any {
+        let user = this.getLoginUser();
+        return user['sessionId'];
+    }
 
-	/*
-	 * @func clearLoginUser()
-	 * @return void
-	*/
-	clearLoginUser(): void {
-		localStorage.clear();
-	}
+    /*
+     * @func setLoginUser()
+     * @return void
+     * @param user: set login user
+     */
+    setLoginUser(user: any): void {
+        localStorage.setItem('logUser', JSON.stringify(user));
+    }
+
+    /*
+     * @func clearLoginUser()
+     * @return void
+     */
+    clearLoginUser(): void {
+        localStorage.clear();
+    }
 }

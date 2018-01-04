@@ -1,3 +1,3 @@
-export interface Deserializable<T> {
-	deserialize(inputeData: any): T;
+export interface Deserializable < T > {
+    deserialize(inputeData: any): T;
 }

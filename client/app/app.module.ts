@@ -16,20 +16,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    HttpModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AppRoutingModule
-  ],
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    DashboardComponent,
-    AddNewTaskComponent
-  ],
-  providers: [ TaskService, LoginService ],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        HttpModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        AppRoutingModule
+    ],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        DashboardComponent,
+        AddNewTaskComponent
+    ],
+    providers: [TaskService, LoginService],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
