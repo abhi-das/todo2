@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { AddNewTaskComponent } from './add-new-task/add-new-task.component';
 
 @Component({
-    selector: 'dashboard',
+    selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss']
 })
@@ -54,7 +54,7 @@ export class DashboardComponent implements OnInit {
         this._taskSrv.getTask().subscribe(
             res => {
 
-                //Error Handling Need here
+                // Error Handling Need here
                 this.retrieveTaskByFlag(res);
 
             },
@@ -202,8 +202,8 @@ export class DashboardComponent implements OnInit {
 
                     this.completedTaskLs = [];
                     this.inCompletedTaskLs = [];
-                    this._router.navigate(['/login']);
                     this._loginSrv.clearLoginUser();
+                    this._router.navigate(['/login']);
                     // console.log('logoff successful! ', res);
                 } else {
                     // console.log('LogOff error! ', res);

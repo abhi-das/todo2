@@ -14,9 +14,6 @@ import {Md5} from 'ts-md5/dist/md5';
 
 describe('LoginService service', () => {
 
-    let loginService: LoginService;
-    let backend: MockBackend;
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -34,7 +31,7 @@ describe('LoginService service', () => {
         TestBed.compileComponents();
     }));
 
-    it('Should create LoginService!', inject([LoginService], (LoginService) => {
+    it('Should create LoginService!', inject([LoginService], () => {
 
         expect(LoginService).toBeDefined();
 

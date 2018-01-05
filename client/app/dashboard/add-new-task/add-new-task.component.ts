@@ -1,11 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { TaskService } from '../../services/task.service';
 import { TaskModel } from '../../models/task-model';
 
 @Component({
-    selector: 'add-new-task',
+    selector: 'app-add-new-task',
     templateUrl: './add-new-task.component.html',
     styleUrls: ['./add-new-task.component.scss'],
     outputs: ['cancelEvent', 'addTaskEvent']
@@ -15,8 +15,8 @@ export class AddNewTaskComponent implements OnInit {
     /*
      * Local variable declaration
      */
-    private cancelEvent = new EventEmitter < boolean > ();
-    private addTaskEvent = new EventEmitter();
+    @Output() cancelEvent = new EventEmitter < boolean > ();
+    @Output() addTaskEvent = new EventEmitter();
 
     addNewTaskForm: FormGroup;
 

@@ -13,9 +13,6 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 
 describe('TaskService service', () => {
 
-    let taskService: TaskService;
-    let backend: MockBackend;
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -33,7 +30,7 @@ describe('TaskService service', () => {
         TestBed.compileComponents();
     }));
 
-    it('Should create TaskServices !', inject([TaskService], (TaskService) => {
+    it('Should create TaskServices !', inject([TaskService], () => {
 
         expect(TaskService).toBeDefined();
 

@@ -73,7 +73,7 @@ export class TaskService {
             }
         });
 
-        if (flag == 'completed') {
+        if (flag === 'completed') {
             this.compSource.next(tmpList);
         } else {
             this.inCompSource.next(tmpList);

@@ -1,4 +1,4 @@
-import { deserializable } from './deserializable.model';
+import { Deserializable } from './deserializable.model';
 
 export class TaskModel implements Deserializable < TaskModel > {
 
