@@ -40,7 +40,7 @@
 					<!-- Add Task Inline Editor -->
 
 					<li class="task__item" *ngIf="isAdd">
-						<add-new-task (cancelEvent)="isCancelFunc($event)" (addTaskEvent)="onAddNewTask()"></add-new-task>
+						<app-add-new-task (cancelEvent)="isCancelFunc($event)" (addTaskEvent)="onAddNewTask()"></app-add-new-task>
 					</li>
 
 				</ul>
