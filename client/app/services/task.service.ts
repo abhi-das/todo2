@@ -107,7 +107,7 @@ export class TaskService {
      */
     taskClose(id: number): void {
 
-        //Make delete Http Call
+        // Make delete Http Call
         const closeComp = this.comp.subscribe(taskItm => {
             taskItm.splice(id, 1);
         });
