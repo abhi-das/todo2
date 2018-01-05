@@ -15,6 +15,11 @@ import { AddNewTaskComponent } from './dashboard/add-new-task/add-new-task.compo
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+/**
+ * The about module
+ *
+ * Just embedding <about> component and it's routing definition in {@link AboutRoutingModule}
+ */
 @NgModule({
     imports: [
         BrowserModule,
