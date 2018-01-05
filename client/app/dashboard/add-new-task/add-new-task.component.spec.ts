@@ -31,7 +31,7 @@ describe('AddNewTaskComponent', () => {
                 AddNewTaskComponent
             ],
             providers: [LoginService, TaskService]
-        })
+        });
 
         fixture = TestBed.createComponent(AddNewTaskComponent);
         component = fixture.componentInstance;
@@ -48,27 +48,27 @@ describe('AddNewTaskComponent', () => {
     });
 
     it('userid should not be empty', () => {
-        let titleEle = component.addNewTaskForm.controls['title'];
+        const titleEle = component.addNewTaskForm.controls['title'];
         expect(titleEle.valid).toBeFalsy();
-    })
+    });
 
     it('password should not be empty', () => {
-        let descriptionEle = component.addNewTaskForm.controls['description'];
+        const descriptionEle = component.addNewTaskForm.controls['description'];
         expect(descriptionEle.valid).toBeFalsy();
-    })
+    });
 
     it('Submit a form data and match the user filled values ', () => {
         expect(component.addNewTaskForm.valid).toBeFalsy();
         component.addNewTaskForm.controls['title'].setValue('New Task Title');
         component.addNewTaskForm.controls['description'].setValue('Task Description');
 
-        let formData = component.addNewTaskForm.value;
+        const formData = component.addNewTaskForm.value;
         component.onAddTask();
 
         expect(formData['title']).toBe('New Task Title');
         expect(formData['description']).toBe('Task Description');
 
-    })
+    });
 
     // Add one more case for redirect after form submit
 

@@ -50,20 +50,20 @@ describe('LoginService service', () => {
                     // pass in new isntance of Response Options
                     new ResponseOptions({
                         body: {
-                            status: "success",
-                            sessionId: "a8t9Rr9bjWD2InfeFLbNS3FNg5mnFqiV",
-                            username: "ali"
+                            status: 'success',
+                            sessionId: 'a8t9Rr9bjWD2InfeFLbNS3FNg5mnFqiV',
+                            username: 'ali'
                         }
                     })
                 ));
             });
 
             // test userLogin @method from LoginService
-            let formData = {
-                username: "ali",
-                password: "password"
+            const formData = {
+                username: 'ali',
+                password: 'password'
             };
-            let userLoginData = new UserLoginModel().deserialize(formData);
+            const userLoginData = new UserLoginModel().deserialize(formData);
 
             service.userLogin(userLoginData)
                 .subscribe(res => {

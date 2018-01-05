@@ -56,13 +56,13 @@ export class AddNewTaskComponent implements OnInit {
      */
     onAddTask(): void {
 
-        let obj = {
-            status: "notCompleted"
+        const obj = {
+            status: 'notCompleted'
         };
 
-        let newData = Object.assign(obj, this.addNewTaskForm.value);
+        const newData = Object.assign(obj, this.addNewTaskForm.value);
 
-        let taskMod = new TaskModel().deserialize(newData)
+        const taskMod = new TaskModel().deserialize(newData);
 
         this._taskSrv.addTask(taskMod).subscribe(
             res => {
@@ -71,14 +71,14 @@ export class AddNewTaskComponent implements OnInit {
 
                     this._taskSrv.inComp.subscribe((itask) => {
                         // console.log('existing.......',itask);
-                        let userTask = new TaskModel().deserialize(res.data);
+                        const userTask = new TaskModel().deserialize(res.data);
                         itask.push(userTask);
                         // this._taskSrv.addNewIncompleteTask(userTask);
-                    })
+                    });
 
                     this.addTaskEvent.emit();
                 } else {
-                    // console.log('AddTask failed! ', res);	
+                    // console.log('AddTask failed! ', res);
                 }
             },
             err => {

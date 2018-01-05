@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
             res => {
 
                 //Error Handling Need here
-                this.retrieveTaskByFlag(res)
+                this.retrieveTaskByFlag(res);
 
             },
             err => {
@@ -141,9 +141,9 @@ export class DashboardComponent implements OnInit {
      */
         onTaskDelete(task: TaskModel): void {
 
-        let taskDeleteInfo: any = {
-            "id": task['_id'],
-            "author": task['author']
+        const taskDeleteInfo: any = {
+            'id': task['_id'],
+            'author': task['author']
         };
 
         this._taskSrv.taskDelete(taskDeleteInfo).subscribe(
@@ -154,14 +154,14 @@ export class DashboardComponent implements OnInit {
 
                     this._taskSrv.inComp.subscribe((itask) => {
                         // console.log('existing.......',itask);
-                        let deletedTaskRes = new TaskModel().deserialize(res.data);
+                        const deletedTaskRes = new TaskModel().deserialize(res.data);
 
                         itask.filter((ele, idx) => {
                             if (ele['_id'] === deletedTaskRes['_id']) {
                                 itask.splice(idx, 1);
                                 return;
                             }
-                        })
+                        });
                     });
 
                 } else {

@@ -4,10 +4,10 @@
  * @publish 01-01-2018
  * @purpose Test Case for the Application Router
 */
-import {Location} from "@angular/common";
+import {Location} from '@angular/common';
 import {TestBed, fakeAsync, tick} from '@angular/core/testing';
-import {RouterTestingModule} from "@angular/router/testing";
-import {Router} from "@angular/router";
+import {RouterTestingModule} from '@angular/router/testing';
+import {Router} from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { AppComponent } from './app.component';
@@ -47,16 +47,16 @@ describe('Router: App', () => {
         router.initialNavigation();
     });
 
-    // it('navigate to "" redirects you to /login', fakeAsync(() => { 
-    //   router.navigate(['']); 
-    //   tick(); 
-    //   expect(location.path()).toBe('login'); 
+    // it('navigate to "" redirects you to /login', fakeAsync(() => {
+    //   router.navigate(['']);
+    //   tick();
+    //   expect(location.path()).toBe('login');
     // }));
 
-    // it('navigate to "" redirects you to /login', fakeAsync(() => { 
-    //   router.navigate(['login']); 
-    //   tick(); 
-    //   expect(location.path()).toBe('login'); 
+    // it('navigate to "" redirects you to /login', fakeAsync(() => {
+    //   router.navigate(['login']);
+    //   tick();
+    //   expect(location.path()).toBe('login');
     // }));
 
 });

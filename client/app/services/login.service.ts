@@ -29,7 +29,7 @@ export class LoginService {
 
         userFormData['password'] = Md5.hashStr(userFormData['password']);
 
-        return this._http.post("/user/auth", userFormData)
+        return this._http.post('/user/auth', userFormData)
             .map((res: Response) => {
                 return res.json();
             });
@@ -42,11 +42,11 @@ export class LoginService {
      */
     userLogOut(): Observable < any > {
 
-        let sessionId = this.getSessionId();
+        const sessionId = this.getSessionId();
         return this._http.get(`/user/logout?sessionId=${sessionId}`)
             .map((res: Response) => {
                 return res.json();
-            });;
+            });
     }
 
     /*
@@ -54,7 +54,7 @@ export class LoginService {
      * @return username
      */
     getLoginUser(): any {
-        let user = JSON.parse(localStorage.getItem('logUser'));
+        const user = JSON.parse(localStorage.getItem('logUser'));
         return user;
     }
 
@@ -63,7 +63,7 @@ export class LoginService {
      * @return sessionId
      */
     getSessionId(): any {
-        let user = this.getLoginUser();
+        const user = this.getLoginUser();
         return user['sessionId'];
     }
 

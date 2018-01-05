@@ -26,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 //         ReactiveFormsModule,
 //         HttpModule,
 //         HttpClientModule
-//       ], 
+//       ],
 //       declarations: [
 //         DashboardComponent,
 //         AddNewTaskComponent

@@ -31,7 +31,7 @@ describe('LoginComponent', () => {
                 LoginComponent
             ],
             providers: [LoginService]
-        })
+        });
 
         fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
@@ -48,27 +48,27 @@ describe('LoginComponent', () => {
     });
 
     it('user name should not be empty', () => {
-        let usernameEle = component.loginForm.controls['username'];
+        const usernameEle = component.loginForm.controls['username'];
         expect(usernameEle.valid).toBeFalsy();
-    })
+    });
 
     it('password should not be empty', () => {
-        let passwordEle = component.loginForm.controls['password'];
+        const passwordEle = component.loginForm.controls['password'];
         expect(passwordEle.valid).toBeFalsy();
-    })
+    });
 
     it('Submit a form data and match the user filled values ', () => {
         expect(component.loginForm.valid).toBeFalsy();
         component.loginForm.controls['username'].setValue('abc');
         component.loginForm.controls['password'].setValue('password');
 
-        let formData = component.loginForm.value;
+        const formData = component.loginForm.value;
         component.onAuth();
 
         expect(formData['username']).toBe('abc');
         expect(formData['password']).toBe('password');
 
-    })
+    });
 
     // Add one more case for redirect after form submit
 

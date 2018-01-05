@@ -47,7 +47,7 @@ export class TaskService {
             .map((taskRes: Response) => taskRes.json()
                 .data.map((task: TaskModel) => new TaskModel().deserialize(task)));
 
-        /* 
+        /*
 		//local data
 		return this._http.get("/data/todo_data.json")
 					.map((taskRes: Response) => taskRes.json()
@@ -91,7 +91,7 @@ export class TaskService {
      */
     changeTaskStatus(id: number): void {
 
-        let onTaskComp = this.inComp.subscribe(taskItm => {
+        const onTaskComp = this.inComp.subscribe(taskItm => {
             this.comp.subscribe(task => task.push(taskItm[id]));
             taskItm.splice(id, 1);
         });
@@ -108,7 +108,7 @@ export class TaskService {
     taskClose(id: number): void {
 
         //Make delete Http Call
-        let closeComp = this.comp.subscribe(taskItm => {
+        const closeComp = this.comp.subscribe(taskItm => {
             taskItm.splice(id, 1);
         });
 
@@ -123,7 +123,7 @@ export class TaskService {
      */
     taskDelete(taskInfo: any): Observable < any > {
 
-        let sessionId = this.sessionId;
+        const sessionId = this.sessionId;
 
         this.headers = new Headers({
             'Content-Type': 'application/json',
@@ -135,9 +135,9 @@ export class TaskService {
             body: taskInfo
         });
 
-        return this._http.delete("/todo?sessionId=" + sessionId, this.options)
+        return this._http.delete('/todo?sessionId=' + sessionId, this.options)
             .map((response: Response) => {
-                return response.json()
+                return response.json();
             });
     }
 
@@ -152,7 +152,7 @@ export class TaskService {
         // Make pdate Http call
         return this._http.put(`/todo?sessionId=${this.sessionId}`, task)
             .map((response: Response) => {
-                return response.json()
+                return response.json();
             });
     }
 }
