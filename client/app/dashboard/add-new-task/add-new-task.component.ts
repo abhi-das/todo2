@@ -7,8 +7,7 @@ import { TaskModel } from '../../models/task-model';
 @Component({
     selector: 'app-add-new-task',
     templateUrl: './add-new-task.component.html',
-    styleUrls: ['./add-new-task.component.scss'],
-    outputs: ['cancelEvent', 'addTaskEvent']
+    styleUrls: ['./add-new-task.component.scss']
 })
 export class AddNewTaskComponent implements OnInit {
 
@@ -56,26 +55,12 @@ export class AddNewTaskComponent implements OnInit {
      */
     onAddTask(): void {
 
-        const obj = {
-            status: 'notCompleted'
-        };
-
-        const newData = Object.assign(obj, this.addNewTaskForm.value);
-
-        const taskMod = new TaskModel().deserialize(newData);
+        const taskMod = new TaskModel().deserialize(this.addNewTaskForm.value);
 
         this._taskSrv.addTask(taskMod).subscribe(
             res => {
                 if (res.status === 'success') {
-                    console.log('AddTask successful! ', res);
-
-                    this._taskSrv.inComp.subscribe((itask) => {
-                        // console.log('existing.......',itask);
-                        const userTask = new TaskModel().deserialize(res.data);
-                        itask.push(userTask);
-                        // this._taskSrv.addNewIncompleteTask(userTask);
-                    });
-
+                    // console.log('AddTask successful! ', res);
                     this.addTaskEvent.emit();
                 } else {
                     // console.log('AddTask failed! ', res);

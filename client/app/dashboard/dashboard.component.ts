@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
      * @param result: Response data from getTask service
      * Filter out tasks list by sending status to @method getTaskByFlag()
      */
-        retrieveTaskByFlag(result: any): void {
+    retrieveTaskByFlag(result: any): void {
         this.completedTaskLs = this._taskSrv.getTaskByFlag(result, this.taskStatusFlag.completed);
         this.inCompletedTaskLs = this._taskSrv.getTaskByFlag(result, this.taskStatusFlag.inCompleted);
     }
@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
      * @param idx: completed task id
      * Update task list by sending completed task id to @method changeTaskStatus()
      */
-        onTaskComplete(idx: number): void {
+    onTaskComplete(idx: number): void {
 
         this._taskSrv.changeTaskStatus(idx);
 
@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
      * @param idx: close task id
      * Remove task from list by sending close task id to @method taskClose()
      */
-        onTaskClose(idx: number): void {
+    onTaskClose(idx: number): void {
 
         this._taskSrv.taskClose(idx);
     }
@@ -104,7 +104,7 @@ export class DashboardComponent implements OnInit {
      * @return void
      * Display add new task form to user
      */
-        onAddEnable(): void {
+    onAddEnable(): void {
         this.isAdd = true;
         // let subIncomp = this.inComp.subscribe(taskItm => {
         // 	taskItm.push(task);
@@ -119,7 +119,7 @@ export class DashboardComponent implements OnInit {
      * @param isCancel: If user has cancel to new task window
      * Hide add new task window without adding new task to the task list
      */
-        isCancelFunc(isCancel: boolean): void {
+    isCancelFunc(isCancel: boolean): void {
         this.isAdd = isCancel;
     }
 
@@ -129,7 +129,7 @@ export class DashboardComponent implements OnInit {
      * @param isCancel: If user has cancel to new task window
      * Hide add new task window without adding new task to the task list
      */
-        onAddNewTask(): void {
+    onAddNewTask(): void {
         this.isAdd = false;
     }
 
@@ -139,47 +139,22 @@ export class DashboardComponent implements OnInit {
      * @param isCancel: If user has cancel to new task window
      * Hide add new task window without adding new task to the task listnumber
      */
-        onTaskDelete(task: TaskModel): void {
+    onTaskDelete(task: TaskModel): void {
 
         const taskDeleteInfo: any = {
             'id': task['_id'],
             'author': task['author']
         };
 
-        this._taskSrv.taskDelete(taskDeleteInfo).subscribe(
+        this._taskSrv.taskDelete(taskDeleteInfo);
 
-            res => {
-                if (res.status === 'success') {
-                    // console.log('Delete SuccessFul!', res);
-
-                    this._taskSrv.inComp.subscribe((itask) => {
-                        // console.log('existing.......',itask);
-                        const deletedTaskRes = new TaskModel().deserialize(res.data);
-
-                        itask.filter((ele, idx) => {
-                            if (ele['_id'] === deletedTaskRes['_id']) {
-                                itask.splice(idx, 1);
-                                return;
-                            }
-                        });
-                    });
-
-                } else {
-                    this.isValidUser = true;
-                    this.onIntervel();
-                    // console.log('Not Authorised!', res);
-                }
-            },
-            err => {
-                // console.log("Delete not possible! ", err);
-            });
     }
 
     /*
      * @func onIntervel()
      * @return void
      */
-        onIntervel(): void {
+    onIntervel(): void {
         setTimeout(() => {
             this.isValidUser = false;
         }, 1000);
@@ -193,7 +168,7 @@ export class DashboardComponent implements OnInit {
      * @method If logout successful send null to setLoginUser() to _loginSrv
      * If logout fail throw error on page
      */
-        onLogoff(): void {
+    onLogoff(): void {
 
         this._loginSrv.userLogOut().subscribe(
             res => {
@@ -202,9 +177,11 @@ export class DashboardComponent implements OnInit {
 
                     this.completedTaskLs = [];
                     this.inCompletedTaskLs = [];
+                    this._taskSrv.inComp.subscribe((itask) => {
+                        itask.splice(0, itask.length);
+                    });
                     this._loginSrv.clearLoginUser();
                     this._router.navigate(['/login']);
-                    // console.log('logoff successful! ', res);
                 } else {
                     // console.log('LogOff error! ', res);
                 }

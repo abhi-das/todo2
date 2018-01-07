@@ -135,10 +135,36 @@ export class TaskService {
             body: taskInfo
         });
 
-        return this._http.delete('/todo?sessionId=' + sessionId, this.options)
+        const deleteTsk = this._http.delete('/todo?sessionId=' + sessionId, this.options)
             .map((response: Response) => {
                 return response.json();
             });
+
+
+        deleteTsk.subscribe(
+
+            res => {
+
+                 if (res.status === 'success') {
+
+                    const localIncompTask = this.inCompSource.getValue();
+
+                   localIncompTask.filter((ele, idx) => {
+                        if (ele['_id'] === res.data['_id']) {
+                            this.inCompSource.getValue().splice(idx, 1);
+                            return;
+                        }
+                    });
+                } else {
+
+                }
+            },
+            err => {
+
+            }
+        );
+
+        return deleteTsk;
     }
 
     /*
@@ -150,9 +176,21 @@ export class TaskService {
     addTask(task: TaskModel): Observable < any > {
 
         // Make pdate Http call
-        return this._http.put(`/todo?sessionId=${this.sessionId}`, task)
-            .map((response: Response) => {
-                return response.json();
-            });
+        const addTsk = this._http.put(`/todo?sessionId=${this.sessionId}`, task)
+                            .map((response: Response) => {
+                                return response.json();
+                            });
+
+        addTsk.subscribe(
+            res => {
+                // Error Handling Need it
+                const taskRes = new TaskModel().deserialize(res.data);
+                this.compSource.getValue().push(taskRes);
+            },
+            err => {
+                console.log('Add Task Error > ', err);
+            }
+        );
+        return addTsk;
     }
 }
