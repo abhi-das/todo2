@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../services/login.service';
@@ -20,14 +21,25 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     htttpFailRes: object;
 
-    constructor(private _route: Router, private _LoginSrv: LoginService) {}
+    constructor(private _route: Router, 
+            private _LoginSrv: LoginService,
+            private _meta: Meta, private _title: Title) {}
 
     /*
      * @func ngOnInit()
      * @return void
      * @variable loginForm: create FormGroup and add FormControls
+     * set html meta tags e.g. meta tags, title etc. for SEO.
      */
     ngOnInit(): void {
+
+        this._meta.addTags([
+            {name: 'author', content: 'Login'},
+            {name: 'description', content: 'Todo login page'}
+        ]);
+
+        this._title.setTitle('Todo Login');
+
         this.loginForm = new FormGroup({
             username: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)

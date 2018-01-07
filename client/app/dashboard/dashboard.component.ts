@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { TaskService } from '../services/task.service';
 import { LoginService } from '../services/login.service';
 import { TaskModel } from '../models/task-model';
@@ -31,8 +32,11 @@ export class DashboardComponent implements OnInit {
 
     inCompletedTaskLs: Array < TaskModel > ;
 
-    constructor(private _taskSrv: TaskService, private _loginSrv: LoginService,
-        private _router: Router) {}
+    constructor(private _taskSrv: TaskService, 
+        private _loginSrv: LoginService,
+        private _router: Router,
+        private _meta: Meta,
+        private _title: Title) {}
 
     /*
      * @func ngOnInit()
@@ -42,8 +46,16 @@ export class DashboardComponent implements OnInit {
      * @method getTask() from _taskSrv API to fetch all the existing tasks from MongoDB
      * If Http call successful call retrieveTaskByFlag to create complete/incomplete task list and task on respective columns on the page
      * If Http fail show error message on Page
+     * set html meta tags e.g. meta tags, title etc. for SEO.
      */
     ngOnInit(): void {
+
+        this._meta.addTags([
+            {name: 'author', content: 'Dashboard'},
+            {name: 'description', content: 'Todo dashboard, todo task list'}
+        ]);
+
+        this._title.setTitle('Todo Deshboard');
 
         this.isAdd = false;
         this.completedTaskLs = [];
