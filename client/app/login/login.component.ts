@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     htttpFailRes: object;
 
-    constructor(private _route: Router, 
+    constructor(private _route: Router,
             private _LoginSrv: LoginService,
             private _meta: Meta, private _title: Title) {}
 

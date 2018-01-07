@@ -186,7 +186,7 @@ export class TaskService {
                 // Error Handling Need it
                 const taskRes = new TaskModel().deserialize(res.data);
                 this.compSource.getValue().push(taskRes);
-                
+
             },
             err => {
                 console.log('Add Task Error > ', err);

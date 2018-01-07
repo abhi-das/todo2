@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
 
     inCompletedTaskLs: Array < TaskModel > ;
 
-    constructor(private _taskSrv: TaskService, 
+    constructor(private _taskSrv: TaskService,
         private _loginSrv: LoginService,
         private _router: Router,
         private _meta: Meta,
@@ -186,7 +186,7 @@ export class DashboardComponent implements OnInit {
             res => {
                 // console.log(res.status);
                 if (res.status === 'success') {
-                    
+
                     this._taskSrv.clearTaskList();
                     this._loginSrv.clearLoginUser();
                     this._router.navigate(['/login']);
