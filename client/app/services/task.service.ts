@@ -186,11 +186,22 @@ export class TaskService {
                 // Error Handling Need it
                 const taskRes = new TaskModel().deserialize(res.data);
                 this.compSource.getValue().push(taskRes);
+                
             },
             err => {
                 console.log('Add Task Error > ', err);
             }
         );
         return addTsk;
+    }
+
+    /*
+     * @func clearTaskList()
+     * @purpose Clear the task list
+     */
+    clearTaskList(): void {
+
+        this.compSource.getValue().splice(0, this.compSource.getValue().length);
+        this.inCompSource.getValue().splice(0, this.inCompSource.getValue().length);
     }
 }

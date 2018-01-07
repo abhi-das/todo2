@@ -174,12 +174,8 @@ export class DashboardComponent implements OnInit {
             res => {
                 // console.log(res.status);
                 if (res.status === 'success') {
-
-                    this.completedTaskLs = [];
-                    this.inCompletedTaskLs = [];
-                    this._taskSrv.inComp.subscribe((itask) => {
-                        itask.splice(0, itask.length);
-                    });
+                    
+                    this._taskSrv.clearTaskList();
                     this._loginSrv.clearLoginUser();
                     this._router.navigate(['/login']);
                 } else {
