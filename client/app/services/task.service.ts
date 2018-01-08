@@ -177,7 +177,7 @@ export class TaskService {
      */
     addTask(formData: any): Observable < any > {
 
-        let addTskStatus = {
+        const addTskStatus = {
             author: {
                 _id: this._logInSrv.getLoginUser()['sessionId'],
                 username: this._logInSrv.getLoginUser()['username']
@@ -185,7 +185,7 @@ export class TaskService {
             status: 'notCompleted'
         };
 
-        let newFormData = Object.assign(formData, addTskStatus);
+        const newFormData = Object.assign(formData, addTskStatus);
 
         const taskMod = new TaskModel().deserialize(newFormData);
 
