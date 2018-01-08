@@ -68,12 +68,11 @@ export class DashboardComponent implements OnInit {
 
                 // Error Handling Need here
                 this.retrieveTaskByFlag(res);
-
             },
             err => {
-                console.log('Http call fail! ', err);
+                // console.log('Http call fail! ', err);
             }, () => {
-                console.log('Http call completed');
+                // console.log('Http call completed');
             });
     }
 
@@ -97,7 +96,6 @@ export class DashboardComponent implements OnInit {
     onTaskComplete(compTask: TaskModel, idx: number): void {
 
         this._taskSrv.changeTaskStatus(compTask, idx);
-
     }
 
     /*
@@ -118,11 +116,6 @@ export class DashboardComponent implements OnInit {
      */
     onAddEnable(): void {
         this.isAdd = true;
-        // let subIncomp = this.inComp.subscribe(taskItm => {
-        // 	taskItm.push(task);
-        // });
-
-        // subIncomp.unsubscribe();
     }
 
     /*
@@ -159,17 +152,6 @@ export class DashboardComponent implements OnInit {
         };
 
         this._taskSrv.taskDelete(taskDeleteInfo);
-
-    }
-
-    /*
-     * @func onIntervel()
-     * @return void
-     */
-    onIntervel(): void {
-        setTimeout(() => {
-            this.isValidUser = false;
-        }, 1000);
     }
 
     /*
