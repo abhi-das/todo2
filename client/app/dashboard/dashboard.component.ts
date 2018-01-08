@@ -141,17 +141,12 @@ export class DashboardComponent implements OnInit {
     /*
      * @func onTaskDelete()
      * @return void
-     * @param isCancel: If user has cancel to new task window
-     * Hide add new task window without adding new task to the task listnumber
+     * @param task: If user has cancel to new task window
+     * Hide add new task window without adding new task to the task list
      */
     onTaskDelete(task: TaskModel): void {
 
-        const taskDeleteInfo: any = {
-            'id': task['_id'],
-            'author': task['author']
-        };
-
-        this._taskSrv.taskDelete(taskDeleteInfo);
+        this._taskSrv.taskDelete(task);
     }
 
     /*

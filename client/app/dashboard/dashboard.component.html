@@ -22,7 +22,7 @@
 							[attr.data-meta]="task.description"
 							[innerHTML]="task.description"></div>
 						<p class="task__item-author text-right text-info">
-							{{logInUser}}
+							{{task.author.username}}
 							<i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i>
 						</p>
 						<button type="button" class="btn btn-sm btn-link task__btn-delete"

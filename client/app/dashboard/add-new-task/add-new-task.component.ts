@@ -55,21 +55,7 @@ export class AddNewTaskComponent implements OnInit {
      */
     onAddTask(): void {
 
-        const taskMod = new TaskModel().deserialize(this.addNewTaskForm.value);
-
-        this._taskSrv.addTask(taskMod).subscribe(
-            res => {
-                if (res.status === 'success') {
-                    // console.log('AddTask successful! ', res);
-                    this.addTaskEvent.emit();
-                } else {
-                    // console.log('AddTask failed! ', res);
-                }
-            },
-            err => {
-                // console.log('AddTask not possible! ', err);
-            }, () => {
-                // console.log('AddTask complete!');
-            });
+        this._taskSrv.addTask(this.addNewTaskForm.value);
+        this.addTaskEvent.emit();
     }
 }

@@ -118,9 +118,14 @@ export class TaskService {
      * @return void
      * @purpose update completed task list on task close
      */
-    taskDelete(taskInfo: any): Observable < any > {
+    taskDelete(task: TaskModel): Observable < any > {
 
         const sessionId = this.sessionId;
+
+        const taskDelete: any = {
+            'id': task['_id'],
+            'author': task['author']
+        };
 
         this.headers = new Headers({
             'Content-Type': 'application/json',
@@ -129,7 +134,7 @@ export class TaskService {
 
         this.options = new RequestOptions({
             headers: this.headers,
-            body: taskInfo
+            body: taskDelete
         });
 
         const deleteTsk = this._http.delete('/todo?sessionId=' + sessionId, this.options)
@@ -170,10 +175,22 @@ export class TaskService {
      * @return incompleteTaskLs[]
      * @purpose update incompleted task list Observerables
      */
-    addTask(task: TaskModel): Observable < any > {
+    addTask(formData: any): Observable < any > {
+
+        let addTskStatus = {
+            author: {
+                _id: this._logInSrv.getLoginUser()['sessionId'],
+                username: this._logInSrv.getLoginUser()['username']
+            },
+            status: 'notCompleted'
+        };
+
+        let newFormData = Object.assign(formData, addTskStatus);
+
+        const taskMod = new TaskModel().deserialize(newFormData);
 
         // Make pdate Http call
-        const addTsk = this._http.put(`/todo?sessionId=${this.sessionId}`, task)
+        const addTsk = this._http.put(`/todo?sessionId=${this.sessionId}`, taskMod)
                             .map((response: Response) => {
                                 return response.json();
                             });
