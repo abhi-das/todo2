@@ -94,9 +94,9 @@ export class DashboardComponent implements OnInit {
      * @param idx: completed task id
      * Update task list by sending completed task id to @method changeTaskStatus()
      */
-    onTaskComplete(idx: number): void {
+    onTaskComplete(compTask: TaskModel, idx: number): void {
 
-        this._taskSrv.changeTaskStatus(idx);
+        this._taskSrv.changeTaskStatus(compTask, idx);
 
     }
 
@@ -187,7 +187,7 @@ export class DashboardComponent implements OnInit {
                 // console.log(res.status);
                 if (res.status === 'success') {
 
-                    this._taskSrv.clearTaskList();
+                    // this._taskSrv.clearTaskList();
                     this._loginSrv.clearLoginUser();
                     this._router.navigate(['/login']);
                 } else {

@@ -85,18 +85,15 @@ export class TaskService {
 
     /*
      * @func changeTaskStatus()
-     * @param id: index of incomplete task which is now completed
+     * @param {compTask} - task which is now completed
+     * @param {idx} - index of incomplete task
      * @return void
-     * @purpose update complete and incomplete task list observables
+     * @purpose update complete and incomplete task list
      */
-    changeTaskStatus(id: number): void {
+    changeTaskStatus(compTask: TaskModel, idx: number): void {
 
-        const onTaskComp = this.inComp.subscribe(taskItm => {
-            this.comp.subscribe(task => task.push(taskItm[id]));
-            taskItm.splice(id, 1);
-        });
-
-        onTaskComp.unsubscribe();
+        this.compSource.getValue().push(compTask);
+        this.inCompSource.getValue().splice(idx, 1);
     }
 
     /*
@@ -185,7 +182,7 @@ export class TaskService {
             res => {
                 // Error Handling Need it
                 const taskRes = new TaskModel().deserialize(res.data);
-                this.compSource.getValue().push(taskRes);
+                this.inCompSource.getValue().push(taskRes);
 
             },
             err => {
