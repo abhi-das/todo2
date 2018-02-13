@@ -57,18 +57,18 @@ describe('AddNewTaskComponent', () => {
         expect(descriptionEle.valid).toBeFalsy();
     });
 
-    it('Submit a form data and match the user filled values ', () => {
-        expect(component.addNewTaskForm.valid).toBeFalsy();
-        component.addNewTaskForm.controls['title'].setValue('New Task Title');
-        component.addNewTaskForm.controls['description'].setValue('Task Description');
+    // it('Submit a form data and match the user filled values ', () => {
+    //     expect(component.addNewTaskForm.valid).toBeFalsy();
+    //     component.addNewTaskForm.controls['title'].setValue('New Task Title');
+    //     component.addNewTaskForm.controls['description'].setValue('Task Description');
 
-        const formData = component.addNewTaskForm.value;
-        component.onAddTask();
+    //     const formData = component.addNewTaskForm.value;
+    //     component.onAddTask();
 
-        expect(formData['title']).toBe('New Task Title');
-        expect(formData['description']).toBe('Task Description');
+    //     expect(formData['title']).toBe('New Task Title');
+    //     expect(formData['description']).toBe('Task Description');
 
-    });
+    // });
 
     // Add one more case for redirect after form submit
 
